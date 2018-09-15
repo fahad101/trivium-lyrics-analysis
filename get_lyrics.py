@@ -7,7 +7,7 @@ from bs4 import BeautifulSoup
 text_file = open('lyrics.txt', 'w')
 
 #scrape genius.com for whatever song you're looking for
-URL = 'https://genius.com/Trivium-vengeance-lyrics'
+URL = 'https://genius.com/Trivium-silence-in-the-snow-lyrics'
 page = requests.get(URL)
 html = BeautifulSoup(page.text, 'html.parser')
 lyrics = html.find('div', class_='lyrics').get_text().encode('ascii', 'ignore')
