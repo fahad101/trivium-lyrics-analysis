@@ -5,3 +5,4 @@ df = pd.read_csv('/Users/hernanrazo/pythonProjects/trivium_lyrics_analysis/data.
 
 
 print(df.to_string())
+
