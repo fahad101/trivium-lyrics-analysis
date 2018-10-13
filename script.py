@@ -8,6 +8,8 @@ from nltk.tokenize import sent_tokenize, word_tokenize
 #nltk.download('punkt')
 
 data_path = ('/Users/hernanrazo/pythonProjects/trivium_lyrics_analysis/data/')
+
+#set strings for each album folder
 album_folder1 = 'ember_to_inferno/'
 album_folder2 = 'trivium_EP/'
 album_folder3 = 'ascendancy/'
