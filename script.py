@@ -4,15 +4,20 @@ import csv
 import pandas as pd 
 import matplotlib.pyplot as plt
 import nltk
-from nltk.tokenize import sent_tokenize, word_tokenize
+from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 
 #run this only the first time or if you don't have things already installed
-nltk.download('punkt')
-nltk.download('stopwords')
+#nltk.download('punkt')
+#nltk.download('stopwords')
 
-#set general path for folder of albums
+#TODO: filter out instrumentals
+#TODO: replace album folder shit with a dictionary??
+#if reverting back to useful verison, go to oct 16
+
+#set general path for folder of albums and any graphs 
 data_path = ('/Users/hernanrazo/pythonProjects/trivium_lyrics_analysis/data/')
+graph_path = ('/Users/hernanrazo/pythonProjects/trivium_lyrics_analysis/graphs/')
 
 #set strings for each album folder
 album_folder1 = 'ember_to_inferno/'
@@ -25,20 +30,30 @@ album_folder7 = 'vengeance_falls/'
 album_folder8 = 'silence_in_the_snow/'
 album_folder9 = 'the_sin_and_the_sentence/'
 
-#set stop words to english
-stop_words = set(stopwords.words('english'))
+album_list = [album_folder1, album_folder2, album_folder3, 
+album_folder4, album_folder5, album_folder6,
+album_folder7, album_folder8, album_folder9]
 
-#tokenize and filter lyrics
-def tokenize_and_filter(album_folder):
+#set stop words to english and add some custom ones
+stop_words = nltk.corpus.stopwords.words('english')
+custom = ['?','(', ')', '.', '[', ']', "'s", "'ll", 'ca'] #add stuff accordingly
+stop_words.extend(custom)
+
+#tokenize,filter, and convert lyrics to lowercase
+def clean_lyrics(album_folder):
+
+	filtered_lyrics = []
+	complete_album = []
 
 	for root, dirs, files in os.walk(data_path + album_folder, topdown = False):
-		
 		for name in files:
-
 			if name != '.DS_Store': #prints .DS_Store sometimes for no reason, stop that
 		
 				#open each file in the specific album folder
 				content = open(data_path + album_folder + name).read()
+
+				#set all letters to lowercase
+				content = content.lower()
 
 				#tokenize the lyrics
 				tokenized_lyrics = nltk.word_tokenize(content)
@@ -47,23 +62,53 @@ def tokenize_and_filter(album_folder):
 				filtered_lyrics = [words for words 
 				in tokenized_lyrics if not words in stop_words]
 
-				filtered_lyrics = []
-
 				for words in tokenized_lyrics:
 					if words not in stop_words:
 						filtered_lyrics.append(words)
 
-				#print(tokenized_lyrics) #TODO: use this later for lyric generation??
-				return(filtered_lyrics)
-				print('lyrics tokenized and filtered')
+				#compile each album back into its own list
+				for filtered_lyrics in filtered_lyrics:
 
-#tokenize lyrics
-tokenize_and_filter(album_folder1) #ember to inferno
-tokenize_and_filter(album_folder2) #trivium EP
-tokenize_and_filter(album_folder3) #ascendancy
-tokenize_and_filter(album_folder4) #the crusade
-tokenize_and_filter(album_folder5) #shogun
-tokenize_and_filter(album_folder6) #in waves
-tokenize_and_filter(album_folder7) #vengeance falls
-tokenize_and_filter(album_folder8) #silence in the snow
-tokenize_and_filter(album_folder9) #the sin and the sentence 
+					complete_album.append(filtered_lyrics)
+
+	return(complete_album)
+
+#return the top 50 used words in an album
+def top_words(album_folder):
+
+	complete_album = clean_lyrics(album_folder)
+
+	fdist = nltk.FreqDist(complete_album)
+
+	return(fdist.most_common(50))
+
+	top_word_plot = plt.figure()
+	plt.title('Top 50 Words for ' + album_folder)
+	top_word_plot = fdist.plot(50, cumulative =True)
+	top_word_plot.savefig(graph_path + 'top_word_1.png')
+
+
+
+
+#sentiment analysis
+#number of words???
+#vocabulary diversity?
+
+#get sentiment analysis of 
+def sentiment_analysis(album_folder):
+
+	complete_album = clean_lyrics(album_folder)
+
+
+
+
+
+
+
+
+
+
+			
+clean_lyrics(album_folder1)
+top_words(album_folder1)
+
