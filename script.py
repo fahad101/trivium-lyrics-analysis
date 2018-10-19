@@ -3,13 +3,16 @@ import os
 import csv
 import pandas as pd 
 import matplotlib.pyplot as plt
+import twython
 import nltk
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
+from nltk.sentiment.vader import SentimentIntensityAnalyzer
 
 #run this only the first time or if you don't have things already installed
 #nltk.download('punkt')
 #nltk.download('stopwords')
+
 
 #TODO: filter out instrumentals
 #TODO: replace album folder shit with a dictionary??
@@ -82,22 +85,17 @@ def top_words(album_folder):
 
 	return(fdist.most_common(50))
 
-	top_word_plot = plt.figure()
-	plt.title('Top 50 Words for ' + album_folder)
-	top_word_plot = fdist.plot(50, cumulative =True)
-	top_word_plot.savefig(graph_path + 'top_word_1.png')
 
-
-
-
-#sentiment analysis
-#number of words???
-#vocabulary diversity?
-
-#get sentiment analysis of 
+#get sentiment analysis of lyrics
 def sentiment_analysis(album_folder):
 
 	complete_album = clean_lyrics(album_folder)
+	sid = SentimentIntensityAnalyzer()
+
+	sentiment = sid.polarity_scores(complete_album)
+
+#what the fuck is this??
+	print(sentiment)
 
 
 
@@ -105,6 +103,7 @@ def sentiment_analysis(album_folder):
 
 
 
+#vocabulary diversity?
 
 
 
