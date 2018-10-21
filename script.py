@@ -99,9 +99,6 @@ def profanity_count(album_folder):
 
 
 
-
-
-
 '''
 #get sentiment analysis of lyrics
 def sentiment_analysis(album_folder):
