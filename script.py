@@ -8,6 +8,7 @@ import nltk
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
+from nltk.stem import PorterStemmer
 
 #run this only the first time or if you don't have things already installed
 #nltk.download('punkt')
@@ -15,8 +16,8 @@ from nltk.sentiment.vader import SentimentIntensityAnalyzer
 
 
 #TODO: filter out instrumentals
+#TODO: stem data
 #TODO: replace album folder shit with a dictionary??
-#if reverting back to useful verison, go to oct 16
 
 #set general path for folder of albums and any graphs 
 data_path = ('/Users/hernanrazo/pythonProjects/trivium_lyrics_analysis/data/')
@@ -70,9 +71,9 @@ def clean_lyrics(album_folder):
 						filtered_lyrics.append(words)
 
 				#compile each album back into its own list
-				for filtered_lyrics in filtered_lyrics:
+				for words in filtered_lyrics:
 
-					complete_album.append(filtered_lyrics)
+					complete_album.append(words)
 
 	return(complete_album)
 
@@ -80,34 +81,46 @@ def clean_lyrics(album_folder):
 def top_words(album_folder):
 
 	complete_album = clean_lyrics(album_folder)
-
 	fdist = nltk.FreqDist(complete_album)
-
 	return(fdist.most_common(50))
 
+#print out the count of each curse word used in the album
+def profanity_count(album_folder):
 
+	print('Profanity count for entire album')
+	complete_album = clean_lyrics(album_folder)
+	profanity_list = ['fuck', 'fucking', 'shit', 'bitch', 'damn'] #maybe add more?
+
+	print(str(album_folder))
+	for words in profanity_list:
+
+		print(words + ': ' + str(complete_album.count(words)))
+	print(' ')
+
+
+
+
+
+
+'''
 #get sentiment analysis of lyrics
 def sentiment_analysis(album_folder):
 
 	complete_album = clean_lyrics(album_folder)
 	sid = SentimentIntensityAnalyzer()
-
 	sentiment = sid.polarity_scores(complete_album)
 
-#what the fuck is this??
+	#what the fuck is this??
 	print(sentiment)
 
-
-
-
-
-
+'''
 
 #vocabulary diversity?
-
 
 
 			
 clean_lyrics(album_folder1)
 top_words(album_folder1)
+profanity_count(album_folder1)
+
 
