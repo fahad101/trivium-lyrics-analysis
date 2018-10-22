@@ -97,7 +97,6 @@ def profanity_count(album_folder):
 		print(words + ': ' + str(complete_album.count(words)))
 	print(' ')
 
-
 '''
 #get sentiment analysis of lyrics
 def sentiment_analysis(album_folder):
