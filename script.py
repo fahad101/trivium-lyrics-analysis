@@ -14,10 +14,8 @@ from nltk.stem import PorterStemmer
 #nltk.download('punkt')
 #nltk.download('stopwords')
 
-
 #TODO: filter out instrumentals
 #TODO: stem data
-#TODO: replace album folder shit with a dictionary??
 
 #set general path for folder of albums and any graphs 
 data_path = ('/Users/hernanrazo/pythonProjects/trivium_lyrics_analysis/data/')
