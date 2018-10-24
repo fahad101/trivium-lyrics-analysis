@@ -9,7 +9,7 @@ file_name = 'TXT_FILE_NAME_HERE'
 text_file = open(data_path + file_name, 'wb')
 
 #scrape genius.com for whatever song you're looking for
-URL = 'GENIUS.COM_URL HERE'
+URL = 'GENIUS.COM_URL_HERE'
 page = requests.get(URL)
 html = BeautifulSoup(page.text, 'html.parser')
 lyrics = html.find('div', class_= 'lyrics').get_text().encode('ascii', 'ignore')
