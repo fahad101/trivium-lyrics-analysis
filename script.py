@@ -110,7 +110,6 @@ def sentiment_analysis(album_folder):
 
 #vocabulary diversity?
 
-
 			
 clean_lyrics(album_folder1)
 top_words(album_folder1)
