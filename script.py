@@ -38,7 +38,7 @@ album_folder7, album_folder8, album_folder9]
 
 #set stop words to english and add some custom ones
 stop_words = nltk.corpus.stopwords.words('english')
-custom = ['?','(', ')', '.', '[', ']', "'s", "'ll", 'ca'] #add stuff accordingly
+custom = ['?','(', ')', '.', '[', ']', "'s", "'ll", 'ca', "n't"] #add stuff accordingly
 stop_words.extend(custom)
 
 #tokenize,filter, and convert lyrics to lowercase
@@ -78,16 +78,26 @@ def clean_lyrics(album_folder):
 #return the top 50 used words in an album
 def top_words(album_folder):
 
+	album_name = str(album_folder).replace('/', '')
 	complete_album = clean_lyrics(album_folder)
 	fdist = nltk.FreqDist(complete_album)
-	return(fdist.most_common(50))
+
+	#create line graph of the top 30 words
+	top_words_plot = plt.figure()
+	plt.title("Top Words Used in " + album_name)
+	fdist.plot(30, cumulative = False)
+	top_words_plot.savefig(graph_path + 'top_words_' + album_name)
+
+	#TODO: word cloud???
+
+	return(fdist.most_common(50)) #is this necessary??
 
 #print out the count of each curse word used in the album
 def profanity_count(album_folder):
 
 	print('Profanity count for entire album')
 	complete_album = clean_lyrics(album_folder)
-	profanity_list = ['fuck', 'fucking', 'shit', 'bitch', 'damn'] #maybe add more?
+	profanity_list = ['fuck', 'fucking', 'shit', 'bitch', 'damn']
 
 	print(str(album_folder))
 	for words in profanity_list:
@@ -114,5 +124,13 @@ def sentiment_analysis(album_folder):
 clean_lyrics(album_folder1)
 top_words(album_folder1)
 profanity_count(album_folder1)
+
+
+
+
+
+
+
+
 
 
