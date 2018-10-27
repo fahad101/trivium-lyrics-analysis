@@ -3,9 +3,6 @@ import os
 import csv
 import pandas as pd 
 import matplotlib.pyplot as plt
-from wordcloud import WordCloud
-import textblob
-from textblob import TextBlob
 import nltk
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
@@ -37,11 +34,11 @@ album_folder7, album_folder8, album_folder9]
 
 #set stop words to english and add some custom ones
 stop_words = nltk.corpus.stopwords.words('english')
-custom = ['?','(', ')', '.', '[', ']', "'s", "'ll", 'ca', "n't"] #add stuff accordingly
+custom = ['?','(', ')', '.', '[', ']','!', "'s", "'ll", 'ca', "n't", "'m", "'re"]
 stop_words.extend(custom)
 
 #tokenize,filter, and convert lyrics to lowercase
-def clean_lyrics(album_folder):
+def clean_data(album_folder):
 
 	filtered_lyrics = []
 	complete_album = []
@@ -74,13 +71,13 @@ def clean_lyrics(album_folder):
 
 					complete_album.append(words)
 
-	print(complete_album)
+	return(complete_album)
 
 #return the top 30 words used in an album
 def top_words(album_folder):
 
 	album_name = str(album_folder).replace('/', '')
-	complete_album = clean_lyrics(album_folder)
+	complete_album = clean_data(album_folder)
 	fdist = nltk.FreqDist(complete_album)
 
 	#create line graph of the top 30 words
@@ -94,11 +91,11 @@ def top_words(album_folder):
 #print out the count of each curse word used in the album
 def profanity_count(album_folder):
 
-	print('Profanity count for entire album')
-	complete_album = clean_lyrics(album_folder)
+	album_name = str(album_folder).replace('/', '')
+	complete_album = clean_data(album_folder)
 	profanity_list = ['fuck', 'fucking', 'shit', 'bitch', 'damn']
 
-	print(str(album_folder))
+	print('Profanity count for ' + album_name)
 	for words in profanity_list:
 
 		print('{0}: {1}'.format(words, str(complete_album.count(words))))
@@ -107,17 +104,38 @@ def profanity_count(album_folder):
 #get sentiment analysis of lyrics
 def sentiment_analysis(album_folder):
 
-	complete_album = clean_lyrics(album_folder)
+	album_name = str(album_folder).replace('/', '')
+	complete_album = clean_data(album_folder)
+	sid = SentimentIntensityAnalyzer()
+	seperator = ' '
 
-	for word in 
-	
-#vocabulary diversity?
+	#combine all lyrics into one giant string
+	#seperating all words with spaces
+	lyrics_string = seperator.join(complete_album)
+
+	#get polarity score for giant string
+	sentiment = sid.polarity_scores(lyrics_string)	
+
+	print("Sentiment analysis for " + album_name)
+	print(sentiment)
+	print(' ')
+
+def lexical_diversity(album_folder):
+
+	album_name = str(album_folder).replace('/', '')
+	complete_album = clean_data(album_folder)
+
+
+
+
+
 
 			
-clean_lyrics(album_folder1) 
+clean_data(album_folder1) 
 #top_words(album_folder1)
 #profanity_count(album_folder1)
-#sentiment_analysis(album_folder1)
+sentiment_analysis(album_folder1)
+
 
 
 
