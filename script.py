@@ -45,7 +45,9 @@ def clean_data(album_folder):
 
 	for root, dirs, files in os.walk(data_path + album_folder, topdown = False):
 		for name in files:
-			if name != '.DS_Store': #prints .DS_Store sometimes for no reason, stop that
+
+			#don't include .DS_store
+			if name != '.DS_Store': 
 		
 				#open each file in the specific album folder
 				content = open(data_path + album_folder + name).read()
@@ -120,21 +122,38 @@ def sentiment_analysis(album_folder):
 	print(sentiment)
 	print(' ')
 
+#return a percentage stating the lexical diversity of an album
 def lexical_diversity(album_folder):
 
 	album_name = str(album_folder).replace('/', '')
 	complete_album = clean_data(album_folder)
 
+	#divide the number of unique words by the total amount of words
+	#multipy by 100 to get a proper percentage
+	lexical_diversity = 100 * (len(set(complete_album)) / len(complete_album)) 
+
+	print("Lexical diversit of " + album_name)
+	print(lexical_diversity)
+	print(' ')
 
 
 
-
-
+     
 			
 clean_data(album_folder1) 
+
 #top_words(album_folder1)
 #profanity_count(album_folder1)
 sentiment_analysis(album_folder1)
+lexical_diversity(album_folder1)
+
+
+
+
+
+
+
+
 
 
 
