@@ -13,7 +13,7 @@ from nltk.sentiment.vader import SentimentIntensityAnalyzer
 #nltk.download('stopwords')
 #nltk.download('vader_lexicon')
 
-#set general path for folder of albums and any graphs 
+#set general path for folders of albums and any graphs 
 data_path = ('/Users/hernanrazo/pythonProjects/trivium_lyrics_analysis/data/')
 graph_path = ('/Users/hernanrazo/pythonProjects/trivium_lyrics_analysis/graphs/')
 
@@ -34,7 +34,8 @@ album_folder7, album_folder8, album_folder9]
 
 #set stop words to english and add some custom ones
 stop_words = nltk.corpus.stopwords.words('english')
-custom = ['?','(', ')', '.', '[', ']','!', "'s", "'ll", 'ca', "n't", "'m", "'re"]
+custom = ['?','(', ')', '.', '[', ']','!', '...',
+';',"`","'",'"',',', "'s", "'ll", 'ca', "n't", "'m", "'re", "'ve"]
 stop_words.extend(custom)
 
 #tokenize,filter, and convert lyrics to lowercase
@@ -83,12 +84,10 @@ def top_words(album_folder):
 	fdist = nltk.FreqDist(complete_album)
 
 	#create line graph of the top 30 words
-	top_words_plot = plt.figure()
-	plt.title("Top Words Used in " + album_name)
+	top_words_plot = plt.figure(figsize = (50, 20))
+	plt.title("Top Words used in " + album_name)
 	fdist.plot(30, cumulative = False)
 	top_words_plot.savefig(graph_path + 'top_words_' + album_name)
-
-	return(fdist.most_common(30)) #is this necessary??
 
 #print out the count of each curse word used in the album
 def profanity_count(album_folder):
@@ -118,7 +117,7 @@ def sentiment_analysis(album_folder):
 	#get polarity score for giant string
 	sentiment = sid.polarity_scores(lyrics_string)	
 
-	print("Sentiment analysis for " + album_name)
+	print("Sentiment Analysis for " + album_name)
 	print(sentiment)
 	print(' ')
 
@@ -132,29 +131,48 @@ def lexical_diversity(album_folder):
 	#multipy by 100 to get a proper percentage
 	lexical_diversity = 100 * (len(set(complete_album)) / len(complete_album)) 
 
-	print("Lexical diversit of " + album_name)
+	print("Lexical diversity of " + album_name + ':')
 	print(lexical_diversity)
 	print(' ')
+	
+#call all functions for each album
 
+top_words(album_folder1)
+top_words(album_folder2)
+top_words(album_folder3)
+top_words(album_folder4)
+top_words(album_folder5)
+top_words(album_folder6)
+top_words(album_folder7)
+top_words(album_folder8)
+top_words(album_folder9)
 
+profanity_count(album_folder1)
+profanity_count(album_folder2)
+profanity_count(album_folder3)
+profanity_count(album_folder4)
+profanity_count(album_folder5)
+profanity_count(album_folder6)
+profanity_count(album_folder7)
+profanity_count(album_folder8)
+profanity_count(album_folder9)
 
-     
-			
-clean_data(album_folder1) 
-
-#top_words(album_folder1)
-#profanity_count(album_folder1)
 sentiment_analysis(album_folder1)
+sentiment_analysis(album_folder2)
+sentiment_analysis(album_folder3)
+sentiment_analysis(album_folder4)
+sentiment_analysis(album_folder5)
+sentiment_analysis(album_folder6)
+sentiment_analysis(album_folder7)
+sentiment_analysis(album_folder8)
+sentiment_analysis(album_folder9)
+
 lexical_diversity(album_folder1)
-
-
-
-
-
-
-
-
-
-
-
-
+lexical_diversity(album_folder2)
+lexical_diversity(album_folder3)
+lexical_diversity(album_folder4)
+lexical_diversity(album_folder5)
+lexical_diversity(album_folder6)
+lexical_diversity(album_folder7)
+lexical_diversity(album_folder8)
+lexical_diversity(album_folder9)
