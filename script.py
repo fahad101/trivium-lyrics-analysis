@@ -97,8 +97,12 @@ def profanity_count(album_folder):
 	profanity_list = ['fuck', 'fucking', 'shit', 'bitch', 'damn']
 
 	print('Profanity count for ' + album_name)
+	
+	#iterate through tokenized lyrics, searching for the curse 
+	#words specified in profanity_list
 	for words in profanity_list:
 
+		#print results onto the terminal
 		print('{0}: {1}'.format(words, str(complete_album.count(words))))
 	print(' ')
 
@@ -117,11 +121,12 @@ def sentiment_analysis(album_folder):
 	#get polarity score for giant string
 	sentiment = sid.polarity_scores(lyrics_string)	
 
+	#print results onto the terminal
 	print("Sentiment Analysis for " + album_name)
 	print(sentiment)
 	print(' ')
 
-#return a percentage stating the lexical diversity of an album
+#print a percentage stating the lexical diversity of an album
 def lexical_diversity(album_folder):
 
 	album_name = str(album_folder).replace('/', '')
@@ -136,7 +141,6 @@ def lexical_diversity(album_folder):
 	print(' ')
 	
 #call all functions for each album
-
 top_words(album_folder1)
 top_words(album_folder2)
 top_words(album_folder3)
