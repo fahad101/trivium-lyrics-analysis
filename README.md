@@ -211,7 +211,7 @@ The results from the `lexical_diversity()` function were probably the results th
 
 ![lex_div](https://github.com/hrazo7/trivium-lyrics-analysis/blob/master/terminal_screenshots/lex_div_results.png)
 
-The data obtained from this project was a bit bland and underwhelming but I did learn a lot of new things in the process. Maybe if I had chosen an artist with more albums I would have gotten more data to work with or if I extend this project to analyize specific songs there would be more to show. In the end, this was more of a project to get started on natural language processing and NLTK. I am still a Trivium fan and look forward to perhaps updating this project when they release more music in the future.
+The data obtained from this project was a bit bland and underwhelming but I did learn a lot of new things in the process. Maybe if I had chosen an artist with more albums I would have gotten more data to work with or if I extend this project to analyze specific songs there would be more to show. In the end, this was more of a project to get started on natural language processing and NLTK. I am still a Trivium fan and look forward to perhaps updating this project when they release more music in the future.
 
 Sources and Helpful Links
 ---
