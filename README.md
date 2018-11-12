@@ -209,6 +209,8 @@ For the `sentiment_analysis()` function, I kind of already knew that it would re
 
 The results from the `lexical_diversity()` function were probably the results that surprised me the most. They all came out to have fairly similar scores for this too. the Trivium EP came out with the highest score but I suspect this is because it has significantly less songs than the rest of the albums. I personally thought Shogun would have the highest score because the lyrics mention many characters and references from Greek mythology. I figured this would have diversified the corpus quite a bit. The structure of the songs in this album also differ greatly from the rest in my opinion, which is also why I thought it would have gotten a higher score. 
 
+![lex_div](https://github.com/hrazo7/trivium-lyrics-analysis/blob/master/terminal_screenshots/lex_div_results.png)
+
 The data obtained from this project was a bit bland and underwhelming but I did learn a lot of new things in the process. Maybe if I had chosen an artist with more albums I would have gotten more data to work with or if I extend this project to analyize specific songs there would be more to show. In the end, this was more of a project to get started on natural language processing and NLTK. I am still a Trivium fan and look forward to perhaps updating this project when they release more music in the future.
 
 Sources and Helpful Links
