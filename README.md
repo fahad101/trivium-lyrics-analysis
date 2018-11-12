@@ -40,8 +40,9 @@ Yes, I am aware that there are more effecient ways to go about this. I decided t
 Code Explanation
 ---
 
-For the actual lyrics analysis I used the NLTK paltform since it specializes in working with human language data. The first function `clean_data()` is used to clean and tokenize the raw data. To clean the lyrics, I removed stopwords, punctuation, set all words to lowercase, and removed isntrumental tracks. Finally, the filtered lyrics were tokenized, or split into a list of strings. Each album was split by words. This function returns an individual album as a long list of strings. 
+For the actual lyrics analysis I used the NLTK platform since it specializes in working with human language data. The first function `clean_data()` is used to clean and tokenize the raw data. To clean the lyrics, I removed stopwords, punctuation, set all words to lowercase, and removed isntrumental tracks. Finally, the filtered lyrics were tokenized, or split into a list of strings. Each album was split by words. This function returns an individual album as a long list of strings. 
 
+As you can see, I added a few custom stopwords for this specific project.
 ```python
 #set stop words to english and add some custom ones
 stop_words = nltk.corpus.stopwords.words('english')
@@ -50,7 +51,6 @@ custom = ['?','(', ')', '.', '[', ']','!', '...',
 stop_words.extend(custom)
 
 ```
-As you can see, I added a few custom stopwords for this specific project.
 
 ```python
 #tokenize,filter, and convert lyrics to lowercase
@@ -175,9 +175,9 @@ def lexical_diversity(album_folder):
 Results
 ---
 
-As a longtime Trivium fan, the results I got from this project were not as exciting as I thought they would be. At first, I was going to place all lyrics into a single .csv file but that method felt ineficient and cumbersome. I later decided to just place each song into its own .txt file and organize them with folders. This worked much better.
+As a longtime Trivium fan, the results I got from this project were not as exciting as I thought they would be. Maybe it's because I was already so familiar with the lyrics just by regular consuption of their music. At first, I was going to place all lyrics into a single .csv file but that method felt ineficient and cumbersome. I later decided to just place each song into its own .txt file and organize them with folders. This worked much better.
 
-The charts obtained from the `top_words()` function are shown below:
+The charts obtained from the `top_words()` function are shown below. Unsurprisingly, a lot of the words that have large occurances are those that are part of chorus sections. Many of these words also have negative connotations, which as shown later, affected the sentiment analysis. For Ascendancy specifically, I found it kind of funny how the long segment of "heys" in A Gunshot to the Head of Trepidation did not make it the number one most used word on the album. 
 
 ![ember_to_inferno_dist](https://github.com/hrazo7/trivium-lyrics-analysis/blob/master/graphs/top_words_ember_to_inferno.png)  
 
@@ -196,12 +196,20 @@ The charts obtained from the `top_words()` function are shown below:
 ![silence_in_the_snow_dist](https://github.com/hrazo7/trivium-lyrics-analysis/blob/master/graphs/top_words_silence_in_the_snow.png)  
 
 ![sin_and_the_sentence_dist](https://github.com/hrazo7/trivium-lyrics-analysis/blob/master/graphs/top_words_the_sin_and_the_sentence.png)  
+ 
+The results for the `profanity_count()` function show that most albums are not heavily explicit. The most explicit album is Ascendancy with Shogun at a close second. This makes sense since they both have "fuck" or "fucking" in their top words as well. Having Ascendancy come out as being the most profane comes as a surprise since only three of its songs have curse words in them (Washing Away Me in the Tides, Departure, and Declaration). Shogun has almost all of its songs include some curse words in them. Albums like In Waves, Vengeance Falls, and Trivium EP have no profanity at all. 
 
-Unsurprisingly, a lot of the words that have large numbers are words that are part of the chorus section of songs. Many of these words have negative connotations, which as shown later, affected the sentiment analysis. mnetion hey from gunshot/ascendancy
+![prof_count1](https://github.com/hrazo7/trivium-lyrics-analysis/blob/master/terminal_screenshots/prof_count1.png)
 
-The results for the `profanity_count()` function show that most albums are not heavily explicit. The most explicit album is Ascendancy with Shogun at a close second. This makes sense they both have "fuck" or "fucking" in their top words as well.For ascendancy being the most profane comes as a surprise since only 3 of its songs have curse words in them (Washing Away Me in the Tides, Departure, and Declaration). Shogun has almost most of its songs including some curse words in them. Albums like In Waves, Vengeance Falls, and Trivium EP have no profanity at all in them. 
+![prof_count2](https://github.com/hrazo7/trivium-lyrics-analysis/blob/master/terminal_screenshots/prof_count2.png)
 
-The data obtained from this project was a bit bland and underwhelming but I did learn a lot of new things in the process. Maybe if I had chosen an artist with more songs I would have gotten more data to work with or if I extend this project to analyis specific songs there would be more to show. In the end, this was more of a project to get started on natural language processing and NLTK. I am still a Trivium fan and look forward to perhaps updating this project when they release more music in the future.
+For the `sentiment_analysis()` function, I kind of already knew that it would return fairly negative results. Trivium's lyrics are not exactly the most happy or optimistic. What stood out to me most was how close all the albums came out to be. The most negative albums are The Crusade and Shogun, even if it's not by much.
+
+![sentiment_screenshot](https://github.com/hrazo7/trivium-lyrics-analysis/blob/master/terminal_screenshots/sent_analysis_results.png)
+
+The results from the `lexical_diversity()` function were probably the results that surprised me the most. They all came out to have fairly similar scores for this too. the Trivium EP came out with the highest score but I suspect this is because it has significantly less songs than the rest of the albums. I personally thought Shogun would have the highest score because the lyrics mention many characters and references from Greek mythology. I figured this would have diversified the corpus quite a bit. The structure of the songs in this album also differ greatly from the rest in my opinion, which is also why I thought it would have gotten a higher score. 
+
+The data obtained from this project was a bit bland and underwhelming but I did learn a lot of new things in the process. Maybe if I had chosen an artist with more albums I would have gotten more data to work with or if I extend this project to analyize specific songs there would be more to show. In the end, this was more of a project to get started on natural language processing and NLTK. I am still a Trivium fan and look forward to perhaps updating this project when they release more music in the future.
 
 Sources and Helpful Links
 ---
