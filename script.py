@@ -37,7 +37,7 @@ custom = ['?','(', ')', '.', '[', ']','!', '...',
 ';',"`","'",'"',',', "'s", "'ll", 'ca', "n't", "'m", "'re", "'ve"]
 stop_words.extend(custom)
 
-#tokenize,filter, and convert lyrics to lowercase
+#tokenize, filter, and convert lyrics to lowercase
 def clean_data(album_folder):
 
 	filtered_lyrics = []
@@ -132,7 +132,7 @@ def lexical_diversity(album_folder):
 	complete_album = clean_data(album_folder)
 
 	#divide the number of unique words by the total amount of words
-	#multipy by 100 to get a proper percentage
+	#multiply by 100 to get a proper percentage
 	lexical_diversity = 100 * (len(set(complete_album)) / len(complete_album)) 
 
 	print("Lexical diversity of " + album_name + ':')
