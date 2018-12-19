@@ -4,7 +4,7 @@ Trivium Lyrics Analysis
 Description
 ---
 
-Trivium is an American heavy metal band originatiing from Orlando, Florida. Since their inception in 1999, they have released eight studio albums and one EP. This program is a statistical analysis of the lyrical content of trivium's discography using natural language processing and the [Natural Language Toolkit (NLTK)](https://www.nltk.org/).
+Trivium is an American heavy metal band originating from Orlando, Florida. Since their inception in 1999, they have released eight studio albums and one EP. This program is a statistical analysis of the lyrical content of Trivium's discography using natural language processing and the [Natural Language Toolkit (NLTK)](https://www.nltk.org/). Check out [my article](https://medium.com/@hernanrazo/trivium-lyrics-analysis-using-nltk-53c37a5bd1c8) on Medium for more information and backstory.
 
 Getting the lyrics
 ---
@@ -35,12 +35,15 @@ text_file.close()
 print('done')
 
 ```
-Yes, I am aware that there are more effecient ways to go about this. I decided to go this sloppy route since there weren't that many songs to get and because the focus of this project was the analysis of lyrics and not how to obtain them. A quick search will probably produce other better methods.
+
+At first, I was going to place all lyrics into a single .csv file but that method felt ineficient and cumbersome. I later decided to just place each song into its own .txt file and organize them with folders. This worked much better.  
+
+Yes, I am aware that there are more effecient ways to go about this. I decided to go this sloppy route since there weren't that many songs to get and because the focus of this project was the analysis of lyrics and not how to obtain them. A quick search will probably produce other better methods.  
 
 Code Explanation
 ---
 
-For the actual lyrics analysis I used the NLTK platform since it specializes in working with human language data. The first function `clean_data()` is used to clean and tokenize the raw data. To clean the lyrics, I removed stopwords, punctuation, set all words to lowercase, and removed isntrumental tracks. Finally, the filtered lyrics were tokenized, or split into a list of strings. Each album was split by words. This function returns an individual album as a long list of strings. 
+For the actual lyrics analysis I used the NLTK platform since it specializes in working with human language data. The first function `clean_data()` is used to clean and tokenize the raw data. To clean the lyrics, I removed stopwords, punctuation, set all words to lowercase, and removed instrumental tracks. Finally, the filtered lyrics were tokenized, or split into a list of strings. Each album was split by words. This function returns an individual album as a long list of strings. 
 
 As you can see, I added a few custom stopwords for this specific project.
 ```python
@@ -131,7 +134,7 @@ def profanity_count(album_folder):
 
 The `sentiment_analysis()` function prints out various sentiment analysis values of an album. For this I used [VADER](https://github.com/cjhutto/vaderSentiment). VADER is a tool used to get various sentiment analysis data from text. The first three values, `neg`, `neu`, and `pos` give a proportion of the text that counts as negative, neutral, and positive, respectively. The final value `compound` is the sum of the first three and standardized to give an overall postivie or negative score between -1 and 1.  
 
-To get these scores, the original tokenized lyrics get combined into one new giant string, seperating each word by a space. This new string is passed to the local instance of the `SentimentIntensityAnalyzer()` class.
+To get these scores, the original tokenized lyrics get combined into one new giant string, separating each word by a space. This new string is passed to the local instance of the `SentimentIntensityAnalyzer()` class.
 
 ```python
 def sentiment_analysis(album_folder):
@@ -154,7 +157,7 @@ def sentiment_analysis(album_folder):
 	print(' ')
 ```
 
-The final function `lexical_diversity()` prints out the lexical diversity of each album. lexical diversity is a ratio of the unique words to the total number of words in a text. Using the built-in functions `set()`, and `len()`, the function counts the unique instances of any words in the album's lyrics. As stated earlier, this is then divided by the total words in the album. The function then multiplies the result by 100 to get a clean percentage. 
+The final function `lexical_diversity()` prints out the lexical diversity of each album. Lexical diversity is a ratio of the unique words to the total number of words in a text. Using the built-in functions `set()`, and `len()`, the function counts the unique instances of any words in the album's lyrics. As stated earlier, this is then divided by the total words in the album. The function then multiplies the result by 100 to get a clean percentage. 
 
 ```python
 def lexical_diversity(album_folder):
@@ -175,7 +178,7 @@ def lexical_diversity(album_folder):
 Results
 ---
 
-As a longtime Trivium fan, the results I got from this project were not as exciting as I thought they would be. Maybe it's because I was already so familiar with the lyrics just by regular consuption of their music. At first, I was going to place all lyrics into a single .csv file but that method felt ineficient and cumbersome. I later decided to just place each song into its own .txt file and organize them with folders. This worked much better.
+As a longtime Trivium fan, the results I got from this project were not as exciting as I thought they would be. Maybe it's because I was already so familiar with the lyrics just by regular consuption of their music. 
 
 The charts obtained from the `top_words()` function are shown below. Unsurprisingly, a lot of the words that have large occurances are those that are part of chorus sections. Many of these words also have negative connotations, which as shown later, affected the sentiment analysis. For Ascendancy specifically, I found it kind of funny how the long segment of "heys" in A Gunshot to the Head of Trepidation did not make it the number one most used word on the album. 
 
@@ -207,7 +210,7 @@ For the `sentiment_analysis()` function, I kind of already knew that it would re
 
 ![sentiment_screenshot](https://github.com/hrazo7/trivium-lyrics-analysis/blob/master/terminal_screenshots/sent_analysis_results.png)
 
-The results from the `lexical_diversity()` function were probably the results that surprised me the most. They all came out to have fairly similar scores for this too. the Trivium EP came out with the highest score but I suspect this is because it has significantly less songs than the rest of the albums. I personally thought Shogun would have the highest score because the lyrics mention many characters and references from Greek mythology. I figured this would have diversified the corpus quite a bit. The structure of the songs in this album also differ greatly from the rest in my opinion, which is also why I thought it would have gotten a higher score. 
+The results from the `lexical_diversity()` function were probably the results that surprised me the most. They all came out to having fairly similar scores for this too. The album Trivium EP came out with the highest score but I suspect this is because it has significantly less songs than the rest of the albums. I personally thought Shogun would have the highest score because the lyrics mention many characters and references from Greek mythology. I figured this would have diversified the corpus quite a bit. The structure of the songs in this album also differ greatly from the rest in my opinion, which is also why I thought it would have gotten a higher score. 
 
 ![lex_div](https://github.com/hrazo7/trivium-lyrics-analysis/blob/master/terminal_screenshots/lex_div_results.png)
 
