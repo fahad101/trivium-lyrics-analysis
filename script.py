@@ -48,7 +48,7 @@ def clean_data(album_folder):
 
 			#don't include .DS_store
 			if name != '.DS_Store': 
-		
+
 				#open each file in the specific album folder
 				content = open(data_path + album_folder + name).read()
 
@@ -73,7 +73,7 @@ def clean_data(album_folder):
 
 					complete_album.append(words)
 
-	return(complete_album)
+	return complete_album
 
 #return the top 30 words used in an album
 def top_words(album_folder):
@@ -118,7 +118,7 @@ def sentiment_analysis(album_folder):
 	lyrics_string = seperator.join(complete_album)
 
 	#get polarity score for giant string
-	sentiment = sid.polarity_scores(lyrics_string)	
+	sentiment = sid.polarity_scores(lyrics_string)
 
 	#print results onto the terminal
 	print("Sentiment Analysis for " + album_name)
@@ -133,49 +133,26 @@ def lexical_diversity(album_folder):
 
 	#divide the number of unique words by the total amount of words
 	#multiply by 100 to get a proper percentage
-	lexical_diversity = 100 * (len(set(complete_album)) / len(complete_album)) 
+	lexical_diversity = 100 * (len(set(complete_album)) / len(complete_album))
 
 	print("Lexical diversity of " + album_name + ':')
 	print(lexical_diversity)
 	print(' ')
-	
+
+
+
 #call all functions for each album
-top_words(album_folder1)
-top_words(album_folder2)
-top_words(album_folder3)
-top_words(album_folder4)
-top_words(album_folder5)
-top_words(album_folder6)
-top_words(album_folder7)
-top_words(album_folder8)
-top_words(album_folder9)
 
-profanity_count(album_folder1)
-profanity_count(album_folder2)
-profanity_count(album_folder3)
-profanity_count(album_folder4)
-profanity_count(album_folder5)
-profanity_count(album_folder6)
-profanity_count(album_folder7)
-profanity_count(album_folder8)
-profanity_count(album_folder9)
+for album in album_list:
+    top_words(album)
 
-sentiment_analysis(album_folder1)
-sentiment_analysis(album_folder2)
-sentiment_analysis(album_folder3)
-sentiment_analysis(album_folder4)
-sentiment_analysis(album_folder5)
-sentiment_analysis(album_folder6)
-sentiment_analysis(album_folder7)
-sentiment_analysis(album_folder8)
-sentiment_analysis(album_folder9)
 
-lexical_diversity(album_folder1)
-lexical_diversity(album_folder2)
-lexical_diversity(album_folder3)
-lexical_diversity(album_folder4)
-lexical_diversity(album_folder5)
-lexical_diversity(album_folder6)
-lexical_diversity(album_folder7)
-lexical_diversity(album_folder8)
-lexical_diversity(album_folder9)
+for album in album_list:
+    profanity_count(album)
+
+
+for album in album_list:
+    sentiment_analysis(album)
+
+for album in album_list:
+    lexical_diversity(album)
